@@ -1,1 +1,36 @@
 public/assets/dynamic_dashboard.js
+
+# Node / JS
+node_modules/
+dist/
+build/
+public/assets/*.js
+
+# Env
+.env
+*.key
+*.pem
+
+# System
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+# Node / JS
+node_modules/
+dist/
+build/
+public/assets/*.js
+
+# Env
+.env
+*.key
+*.pem
+
+# System
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
