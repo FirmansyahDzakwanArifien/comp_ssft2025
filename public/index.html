@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>♻️ Smart Trash Bin Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="bg-gradient-to-br from-green-50 to-green-100 font-sans text-gray-800 min-h-screen flex flex-col">
+  
+  <!-- Header -->
+  <header class="bg-green-600 text-white shadow-lg p-6">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between">
+      <h1 class="text-2xl md:text-3xl font-bold flex items-center gap-2">
+        ♻️ Smart Trash Bin
+      </h1>
+      <p class="text-sm md:text-base opacity-90">IoT + AI + Firebase Monitoring</p>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="flex-1 p-6 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+    
+    <!-- Latest Prediction -->
+    <section class="col-span-1 bg-white shadow-lg rounded-2xl p-6 hover:shadow-2xl transition">
+      <h2 class="text-lg font-semibold text-green-600 flex items-center gap-2">📌 Latest Prediction</h2>
+      <p id="latestPrediction" class="mt-6 text-3xl font-extrabold text-gray-800 text-center">
+        Waiting for data...
+      </p>
+    </section>
+
+    <!-- Prediction History -->
+    <section class="col-span-2 bg-white shadow-lg rounded-2xl p-6 hover:shadow-2xl transition">
+      <h2 class="text-lg font-semibold text-green-600 flex items-center gap-2">📊 Prediction History</h2>
+      <div class="overflow-x-auto mt-4">
+        <table class="w-full border-collapse">
+          <thead>
+            <tr class="bg-green-100">
+              <th class="p-3 text-left">⏰ Time</th>
+              <th class="p-3 text-left">🗑️ Category</th>
+            </tr>
+          </thead>
+          <tbody id="historyTable" class="divide-y text-sm md:text-base">
+            <tr><td class="p-3">-</td><td class="p-3">-</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Pie Chart -->
+    <section class="col-span-1 md:col-span-1 bg-white shadow-lg rounded-2xl p-6 hover:shadow-2xl transition">
+      <h2 class="text-lg font-semibold text-green-600 flex items-center gap-2">📈 Composition (Pie)</h2>
+      <canvas id="pieChart" class="mt-6"></canvas>
+    </section>
+
+    <!-- Line Chart -->
+    <section class="col-span-2 md:col-span-2 bg-white shadow-lg rounded-2xl p-6 hover:shadow-2xl transition">
+      <h2 class="text-lg font-semibold text-green-600 flex items-center gap-2">📉 Frequency Over Time</h2>
+      <canvas id="lineChart" class="mt-6"></canvas>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center text-sm text-gray-500 py-4 border-t">
+    © 2025 Smart Trash Bin | IoT + Firebase + AI
+  </footer>
+
+  <!-- Firebase / Logic -->
+  <script type="module" src="assets/dashboard.js"></script>
+</body>
+</html>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  // ====== PIE CHART: Komposisi Kategori ======
+  const ctxPie = document.getElementById('pieChart').getContext('2d');
+  const pieChart = new Chart(ctxPie, {
+    type: 'pie',
+    data: {
+      labels: ['B3', 'Food Waste', 'Recycle'],
+      datasets: [{
+        data: [10, 80, 10], // dummy data
+        backgroundColor: ['#e74c3c', '#27ae60', '#2980b9']
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom'
+        }
+      }
+    }
+  });
+
+  // ====== LINE CHART: Frekuensi per Waktu ======
+  const ctxLine = document.getElementById('lineChart').getContext('2d');
+  const lineChart = new Chart(ctxLine, {
+    type: 'line',
+    data: {
+      labels: ["09:55", "10:00", "10:05", "10:10", "10:15"],
+      datasets: [{
+        label: 'Deteksi Sampah',
+        data: [2, 5, 3, 6, 4], // dummy data
+        fill: false,
+        borderColor: '#2ecc71',
+        tension: 0.2
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
